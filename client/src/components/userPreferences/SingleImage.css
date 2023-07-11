@@ -1,0 +1,6 @@
+.Single-image{
+    max-width: 50%;
+    height: 30%;
+    flex-wrap: wrap;
+    flex-flow: space-evenly;
+}
