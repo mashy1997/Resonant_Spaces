@@ -8,47 +8,73 @@ const ArtworkPreferenceOptionsContainer = () => {
     const[artworkList, setArtworkList] = useState([])
 
 
-    const baseURL = 'https://api.harvardartmuseums.org/object?culture=37527759&apikey=' + API_KEY; //italian
+    const baseURL = 'https://api.harvardartmuseums.org/' + API_KEY; //need string concatination here
     // const baseURL = 'https://api.harvardartmuseums.org/object?culture=37528362&apikey=' + API_KEY; //polish , bug with baseimg url
     // const baseURL = 'https://api.harvardartmuseums.org/object?culture=37527813&apikey=' + API_KEY; //jewish art,
 
-    const culture = {
-        American: 37526778,
-        British: 37527039,
-        Chinese: 37527174,
-        Dutch: 37527300,
-        Egyptian: 37527318,
-        French: 37527426,
-        German: 37527453,
-        Greek: 37527534,
-        Indian: 37527678,
-        Islamic: 37527741,
-        Italian: 37527759,
-        Japanese: 37527795,
-        Korean: 37527867,
-        Persian: 37528308,
-        Roman: 37528416,
-        Russian: 37528461
-    };
+    const getqueryURL = (query) => {
+        const resultOfFetch = fetch(`https://api.harvardartmuseums.org/${query}` + API_KEY)
+        .then(data => data.json())
+        .then(artworkData => setArtworkList(artworkData.records))
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     const getAllArtworks = () => {
         fetch(baseURL)
             .then(res => res.json())
             .then(artworkData => setArtworkList(artworkData.records))
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
-    useEffect(getAllArtworks, [])
+    const culture = {
+        American: "object?culture=37526778&",
+        British: "object?culture=37527039&",
+        Chinese: "object?culture=37527174&",
+        Dutch: "object?culture=37527300&",
+        Egyptian: "object?culture=37527318&",
+        French: "object?culture=37527426&",
+        German: "object?culture=37527453&",
+        Greek: "object?culture=37527534&",
+        Indian: "object?culture=37527678&",
+        Islamic: "object?culture=37527741&",
+        Italian: "object?culture=37527759&",
+        Japanese: "object?culture=37527795&",
+        Korean: "object?culture=37527867&",
+        Persian: "object?culture=37528308&",
+        Roman: "object?culture=37528416&",
+        Russian: "object?culture=37528461&"
+    };
 
-    useEffect(() => {
-        // Log artworkList to the console whenever it changes
-        console.log(artworkList);
-      }, [artworkList]);
+    const cultureObjectkey = Object.keys(culture) 
+    // console.log(cultureObjectkey)
+    
+    const cultureObjectValue = Object.values(culture)
+    // console.log(cultureObjectValue)
+
+
+    // useEffect(getAllArtworks, [])
+
+    // useEffect(() => {
+    //     // Log artworkList to the console whenever it changes
+    //     console.log(artworkList);
+    //   }, [artworkList]);
+
+    const handleItalianClick = () => {
+        let italianQuery = cultureObjectValue.Italian
+        getqueryURL(italianQuery)
+    }
     
 
     return (
         <>
         <div className= "PreferenceContainer"/>
         <ImageGalleryView artworkList={artworkList} />
+        <label for="Italian"></label> <button id="Italian">Italian</button>
+        {/* <button onClick={handleItalianClick}>Italian</button> */}
         </>
     )
 }
