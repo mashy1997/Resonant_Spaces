@@ -8,12 +8,12 @@ const ArtworkPreferenceOptionsContainer = () => {
     const[artworkList, setArtworkList] = useState([])
 
 
-    const baseURL = 'https://api.harvardartmuseums.org/' + API_KEY; //need string concatination here
+    const baseURL = 'https://api.harvardartmuseums.org/' + API_KEY;
     // const baseURL = 'https://api.harvardartmuseums.org/object?culture=37528362&apikey=' + API_KEY; //polish , bug with baseimg url
     // const baseURL = 'https://api.harvardartmuseums.org/object?culture=37527813&apikey=' + API_KEY; //jewish art,
 
     const getqueryURL = (query) => {
-        const resultOfFetch = fetch(`https://api.harvardartmuseums.org/${query}` + API_KEY)
+        const resultOfFetch = fetch(`https://api.harvardartmuseums.org/${query}apikey=` + API_KEY)
         .then(data => data.json())
         .then(artworkData => setArtworkList(artworkData.records))
             .catch((error) => {
@@ -56,24 +56,24 @@ const ArtworkPreferenceOptionsContainer = () => {
     // console.log(cultureObjectValue)
 
 
-    // useEffect(getAllArtworks, [])
-
-    // useEffect(() => {
-    //     // Log artworkList to the console whenever it changes
-    //     console.log(artworkList);
-    //   }, [artworkList]);
-
-    const handleItalianClick = () => {
-        let italianQuery = cultureObjectValue.Italian
-        getqueryURL(italianQuery)
+    const handleCultureClick = (evt, id) => {
+        console.log(evt)
+        let practise = evt.target
+        console.log("this is EVENT:", practise)
+        let cultureButtonId = evt.target.getAttribute('id')
+        console.log("HELOOOOOO", cultureButtonId)
+        let cultureButtonValue = culture[cultureButtonId]
+        console.log("WOOAHHHHH", cultureButtonValue)
+        let cultureQuery = culture.id
+        getqueryURL(cultureButtonValue)
     }
-    
 
     return (
         <>
         <div className= "PreferenceContainer"/>
         <ImageGalleryView artworkList={artworkList} />
-        <label for="Italian"></label> <button id="Italian">Italian</button>
+        <label for="culture"></label> <button id="Italian" onClick={handleCultureClick}>Italian</button>
+        <label for="culture"></label> <button id="French" onClick={handleCultureClick}>French</button>
         {/* <button onClick={handleItalianClick}>Italian</button> */}
         </>
     )
