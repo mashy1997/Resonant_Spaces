@@ -2,10 +2,16 @@ import React, {useState, useEffect} from "react";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { API_KEY } from '../env.js'
 import ImageGalleryView from '../components/userPreferences/ImageGalleryView.js'
+// import MoodBoard from "../components/userPreferences/MoodBoard.js";
 
 const ArtworkPreferenceOptionsContainer = () => {
 
     const[artworkList, setArtworkList] = useState([])
+    const[newMoodBoard, setNewMoodBoard] = useState({
+        name: "Pink Kitchen",
+        savedArtworks: []
+    })
+    const[allMoodBoards, setAllMoodBoards] = useState([])
 
 
     const baseURL = 'https://api.harvardartmuseums.org/' + API_KEY;
@@ -29,6 +35,20 @@ const ArtworkPreferenceOptionsContainer = () => {
             })
     }
 
+
+    const addArtworkToMoodBoard = (chosenArtwork) => {
+        setNewMoodBoard((previousMoodBoard) => {
+            const updatedMoodBoard = {...previousMoodBoard }
+            const copyOfsavedArtworks = [...updatedMoodBoard.savedArtworks]
+            copyOfsavedArtworks.push(chosenArtwork)
+            return {
+                ...updatedMoodBoard,
+                savedArtworks: copyOfsavedArtworks
+            }
+        })
+    };
+
+
     const culture = {
         American: "object?culture=37526778&",
         British: "object?culture=37527039&",
@@ -48,9 +68,7 @@ const ArtworkPreferenceOptionsContainer = () => {
     };
 
     const cultureObjectkey = Object.keys(culture) 
-    // console.log(cultureObjectkey)
     const cultureObjectValue = Object.values(culture)
-    // console.log(cultureObjectValue)
 
     const religion = {
         Christian: "object?periods=1793&7386&7387&786&602&",
@@ -59,9 +77,7 @@ const ArtworkPreferenceOptionsContainer = () => {
     }
 
     const religionObjectKey = Object.keys(religion)
-    // console.log(religionObjectKey)
     const religionObjectValue = Object.values(religion)
-    // console.log(religionObjectValue)
 
     const period = {
         Neolithic: "object?periods=528&",
@@ -79,9 +95,7 @@ const ArtworkPreferenceOptionsContainer = () => {
     }
 
     const periodObjectKey = Object.keys(period)
-    // console.log(periodObjectKey)
     const periodObjectValue = Object.values(period)
-    // console.log(periodObjectValue)
 
     const century = {
         12: "object?century=37525743&",
@@ -97,9 +111,7 @@ const ArtworkPreferenceOptionsContainer = () => {
     }
 
     const centuryObjectKey = Object.keys(century)
-    // console.log(centuryObjectKey)
     const centuryObjectValue = Object.values(century)
-    // console.log(centuryObjectValue)
 
     const handleCultureClick = (evt, id) => {
         console.log(evt)
@@ -148,7 +160,6 @@ const ArtworkPreferenceOptionsContainer = () => {
     return (
         <>
         <div className= "Preference-container"/>
-        <ImageGalleryView artworkList={artworkList} />
         <div className="Culture-button-container"/>
         <label for="culture"></label> <button id="American" onClick={handleCultureClick}>American</button>
         <label for="culture"></label> <button id="British" onClick={handleCultureClick}>British</button>
@@ -171,14 +182,14 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="religion"></label> <button id="Jewish" onClick={handleReligionClick}>Jewish</button>
         <div className="Period-button-container"/>
         <label for="period"></label> <button id="Neolithic" onClick={handlePeriodClick}>Neolithic</button>
-        <label for="period"></label> <button id="BronzeAge" onClick={handlePeriodClick}>BronzeAge</button>
-        <label for="period"></label> <button id="IronAges" onClick={handlePeriodClick}>IronAges</button>
+        <label for="period"></label> <button id="BronzeAge" onClick={handlePeriodClick}>Bronze Age</button>
+        <label for="period"></label> <button id="IronAges" onClick={handlePeriodClick}>Iron Ages</button>
         <label for="period"></label> <button id="Archaic" onClick={handlePeriodClick}>Archaic</button>
         <label for="period"></label> <button id="Geometric" onClick={handlePeriodClick}>Geometric</button>
         <label for="period"></label> <button id="Classical" onClick={handlePeriodClick}>Classical</button>
         <label for="period"></label> <button id="Mughal" onClick={handlePeriodClick}>Mughal</button>
         <label for="period"></label> <button id="Ottoman" onClick={handlePeriodClick}>Ottoman</button>
-        <label for="period"></label> <button id="QingDynasty" onClick={handlePeriodClick}>QingDynasty</button>
+        <label for="period"></label> <button id="QingDynasty" onClick={handlePeriodClick}>Qing Dynasty</button>
         <label for="period"></label> <button id="Edo" onClick={handlePeriodClick}>Edo</button>
         <label for="period"></label> <button id="Modern" onClick={handlePeriodClick}>Modern</button>
         <div className="Century-button-container"/>
@@ -192,6 +203,9 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="century"></label> <button id="19" onClick={handleCenturyClick}>19</button>
         <label for="century"></label> <button id="20" onClick={handleCenturyClick}>20</button>
         <label for="century"></label> <button id="21" onClick={handleCenturyClick}>21</button>
+        {/* <MoodBoard artworkList={artworkList}/> */}
+        <ImageGalleryView artworkList={artworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
+
         </>
     )
 }
