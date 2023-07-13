@@ -1,48 +1,30 @@
-// import React, {useState} from "react";
-// import ImageGalleryView from "./ImageGalleryView";
+import React, {useState} from "react";
+import ImageGalleryView from "./ImageGalleryView";
 
-// const MoodBoard = ({artworkList}) => {
+const MoodBoard = ({newMoodBoard}) => {
 
-//     const [moodboard, setMoodboard] = useState([]);
-//     const [newMoodboardName, setNewMoodboardName] = useState('');
+    const[isShowingArtwork, setisShowingArtwork] = useState(false)
+
+    const viewMoodboard = () => {
+        setisShowingArtwork(!isShowingArtwork)
+        // const moodboardDisplay = newMoodBoard
+        // return(moodboardDisplay)
+    }
+
+    const moodboardArtwork = newMoodBoard.savedArtworks.map(artwork => {
+        return <p key={artwork.id}>{artwork.title}</p>
+    })
 
 
-//     const createMoodBoard = () => {
-//         const newMoodBoard = {
-//             name: newMoodboardName,
-//             savedArtworks: []
-//         };
+    return (
+        <>
+        <div className="Moodboard-component">
+        <h2>{newMoodBoard.name}</h2>
+        <button onClick={viewMoodboard}>View MoodBoard</button>
+        {isShowingArtwork && moodboardArtwork}
+        </div>
+        </>
+    )
+}
 
-//         setMoodboard(previousMoodBoards => [...previousMoodBoards, newMoodBoard]);
-//         setNewMoodboardName('');
-//     };
-
-//     const handleNewMoodBoardNameChange = (event) => {
-//         setNewMoodboardName(event.target.value)
-//     };
-
-//     return (
-//         <>
-//         <p>I am a moodboard</p>
-//             <div className="MoodBoard-Form">
-//             <input 
-//             type= "text"
-//             value= {newMoodboardName}
-//             onChange= {handleNewMoodBoardNameChange}
-//             placeholder= "Mood Board Name"
-//             />
-//                 <button onClick={createMoodBoard}>Create MoodBoard</button>
-//             </div>
-//             <h2>
-//                 Saved MoodBoards
-//             </h2>
-//             <ul>
-//                 {moodboard.map((moodboard, index) => (
-//                     <li key={index}>{moodboard.name}</li>
-//                 ))}
-//             </ul>
-//         </>
-//     )
-// }
-
-// export default MoodBoard
+export default MoodBoard

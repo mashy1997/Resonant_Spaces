@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { API_KEY } from '../env.js'
 import ImageGalleryView from '../components/userPreferences/ImageGalleryView.js'
-// import MoodBoard from "../components/userPreferences/MoodBoard.js";
+import MoodBoard from "../components/userPreferences/MoodBoard.js";
 
 const ArtworkPreferenceOptionsContainer = () => {
 
@@ -18,7 +18,8 @@ const ArtworkPreferenceOptionsContainer = () => {
 
 
     const getqueryURL = (query) => {
-        const resultOfFetch = fetch(`https://api.harvardartmuseums.org/${query}apikey=` + API_KEY)
+        // const resultOfFetch = fetch(`https://api.harvardartmuseums.org/${query}apikey=` + API_KEY)
+        const resultOfFetch = fetch(`https://api.harvardartmuseums.org/object?size=20&${query}apikey=` + API_KEY) //with 20 items request
         .then(data => data.json())
         .then(artworkData => setArtworkList(artworkData.records))
             .catch((error) => {
@@ -34,7 +35,6 @@ const ArtworkPreferenceOptionsContainer = () => {
                 console.log(error)
             })
     }
-
 
     const addArtworkToMoodBoard = (chosenArtwork) => {
         setNewMoodBoard((previousMoodBoard) => {
@@ -203,9 +203,8 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="century"></label> <button id="19" onClick={handleCenturyClick}>19</button>
         <label for="century"></label> <button id="20" onClick={handleCenturyClick}>20</button>
         <label for="century"></label> <button id="21" onClick={handleCenturyClick}>21</button>
-        {/* <MoodBoard artworkList={artworkList}/> */}
         <ImageGalleryView artworkList={artworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
-
+        <MoodBoard newMoodBoard={newMoodBoard}/>
         </>
     )
 }

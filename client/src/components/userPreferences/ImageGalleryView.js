@@ -9,33 +9,45 @@ const ImageGalleryView = ({artworkList, addArtworkToMoodBoard}) => {
       console.log("Artwork added to moodboard:", chosenArtwork)
     }
 
-    // const artworkItems = artworkList.map((artwork, index) => {
-    //     return (
-    //         <SingleImage artwork={artwork} key={index}/>
-    //     )
-    // })
-
+    // return (
+    //   <>
+    //     <div className="Image-gallery-view-component">
+    //     <ul>
+    //       {artworkList.map((artwork, index) => (
+    //         <div key={index}>
+    //           <SingleImage artwork={artwork} />
+    //           <button onClick={() => handleAddToMoodboard(artwork)}>
+    //             Add to Moodboard
+    //           </button>
+    //         </div>
+    //       ))}
+    //     </ul>
+    //   </div>
+    //   </>
+    // )
     return (
-        <div>
+      <div className="Image-gallery-view-component">
         <ul>
-          {artworkList.map((artwork, index) => (
-            <div key={index}>
-              <SingleImage artwork={artwork} />
-              <button onClick={() => handleAddToMoodboard(artwork)}>
-                Add to Moodboard
-              </button>
-            </div>
-          ))}
+          {artworkList.map((artwork, index) => {
+            const handleAddToMoodboard = () => {
+              addArtworkToMoodBoard(artwork);
+              console.log("Artwork added to moodboard:", artwork);
+            };
+  
+            if (!artwork.images || artwork.images.length === 0) {
+              return null; // Skip rendering the component if there are no images
+            }
+  
+            return (
+              <div key={index}>
+                <SingleImage artwork={artwork} />
+                <button onClick={handleAddToMoodboard}>Add to Moodboard</button>
+              </div>
+            );
+          })}
         </ul>
-        {/* <button onClick={handleAddToMoodboard}>Create MoodBoard</button> */}
       </div>
-        // <div>
-        //     <ul>
-        //         {artworkItems}
-        //     </ul>
-        //     <button onClick={createMoodBoard}>Create MoodBoard</button>
-        // </div>
-    )
+    );
 }
 
 export default ImageGalleryView;
