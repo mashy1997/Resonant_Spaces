@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import ImageGalleryView from "./ImageGalleryView";
 
-const MoodBoard = ({newMoodBoard}) => {
+const MoodBoard = ({newMoodBoard, deleteArtworkFromMoodBoard}) => {
 
     const[isShowingArtwork, setisShowingArtwork] = useState(false)
 
@@ -11,9 +11,21 @@ const MoodBoard = ({newMoodBoard}) => {
         // return(moodboardDisplay)
     }
 
-    const moodboardArtwork = newMoodBoard.savedArtworks.map(artwork => {
-        return <p key={artwork.id}>{artwork.title}</p>
-    })
+    const handleDeleteArtwork = (artworkId) => {
+        deleteArtworkFromMoodBoard(artworkId)
+    }
+
+    const moodboardArtwork = newMoodBoard.savedArtworks.map((artwork) => (
+        <div key={artwork.id}>
+          {artwork.images && artwork.images.length > 0 && (
+            <img className="Single-image" src={artwork.images[0].baseimageurl} alt={artwork.title} />
+          )}
+          <p>{artwork.title}</p>
+          <p>{artwork.people && artwork.people.length ? artwork.people[0].name : ""}</p>
+          <button onClick={() => handleDeleteArtwork(artwork.id)}>Delete</button>
+        </div>
+      ));
+
 
 
     return (

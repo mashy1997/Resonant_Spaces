@@ -4,10 +4,11 @@ import MoodBoard from "./MoodBoard";
 
 const ImageGalleryView = ({artworkList, addArtworkToMoodBoard}) => {
 
-    const handleAddToMoodboard = (chosenArtwork) => {
-      addArtworkToMoodBoard(chosenArtwork);
-      console.log("Artwork added to moodboard:", chosenArtwork)
-    }
+    // const handleAddToMoodboard = (chosenArtwork) => {
+    //   addArtworkToMoodBoard(chosenArtwork);
+    //   console.log("Artwork added to moodboard:", chosenArtwork)
+    // }
+
 
     // return (
     //   <>
@@ -30,7 +31,7 @@ const ImageGalleryView = ({artworkList, addArtworkToMoodBoard}) => {
         <ul>
           {artworkList.map((artwork, index) => {
             const handleAddToMoodboard = () => {
-              addArtworkToMoodBoard(artwork);
+              addArtworkToMoodBoard(artwork)
               console.log("Artwork added to moodboard:", artwork);
             };
   

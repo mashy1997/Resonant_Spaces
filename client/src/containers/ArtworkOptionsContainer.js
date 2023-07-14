@@ -19,7 +19,7 @@ const ArtworkPreferenceOptionsContainer = () => {
 
     const getqueryURL = (query) => {
         // const resultOfFetch = fetch(`https://api.harvardartmuseums.org/${query}apikey=` + API_KEY)
-        const resultOfFetch = fetch(`https://api.harvardartmuseums.org/object?size=20&${query}apikey=` + API_KEY) //with 20 items request
+        const resultOfFetch = fetch(`https://api.harvardartmuseums.org/${query}apikey=` + API_KEY) //with 20 items request
         .then(data => data.json())
         .then(artworkData => setArtworkList(artworkData.records))
             .catch((error) => {
@@ -47,6 +47,17 @@ const ArtworkPreferenceOptionsContainer = () => {
             }
         })
     };
+
+    const deleteArtworkFromMoodBoard = (artworkId) => {
+        setNewMoodBoard((previousMoodBoard) => {
+          const updatedMoodBoard = { ...previousMoodBoard };
+          const updatedSavedArtworks = updatedMoodBoard.savedArtworks.filter(
+            (artwork) => artwork.id !== artworkId
+          );
+          updatedMoodBoard.savedArtworks = updatedSavedArtworks;
+          return updatedMoodBoard;
+        });
+      };
 
 
     const culture = {
@@ -204,7 +215,7 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="century"></label> <button id="20" onClick={handleCenturyClick}>20</button>
         <label for="century"></label> <button id="21" onClick={handleCenturyClick}>21</button>
         <ImageGalleryView artworkList={artworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
-        <MoodBoard newMoodBoard={newMoodBoard}/>
+        <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
         </>
     )
 }
