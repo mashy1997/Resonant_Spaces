@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import SingleImage from "./SingleImage";
 import MoodBoard from "./MoodBoard";
+import ColorSingleImage from "./ColorSingleImage";
 
 const ImageGalleryView = ({artworkList, colorArtworkList, addArtworkToMoodBoard}) => {
 
@@ -45,6 +46,21 @@ const ImageGalleryView = ({artworkList, colorArtworkList, addArtworkToMoodBoard}
                 <button onClick={handleAddToMoodboard}>Add to Moodboard</button>
               </div>
             );
+          })}
+        </ul>
+        <ul>
+          {colorArtworkList.map((artworkColor, index) => {
+            const handleAddToMoodboard = () => {
+              addArtworkToMoodBoard(artworkColor);
+              console.log("Artwork color added to moodboard:", artworkColor)
+            };
+
+            return (
+              <div key={index}>
+                <ColorSingleImage artworkColor={artworkColor} />
+                <button onClick={handleAddToMoodboard}>Add to Moodboard</button>
+              </div>
+            )
           })}
         </ul>
       </div>

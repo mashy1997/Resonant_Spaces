@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { API_KEY, API_KEY2 } from '../env.js'
-import ImageGalleryView from '../components/userPreferences/ImageGalleryView.js'
+import { API_KEY, API_KEY2 } from '../env.js';
+import ImageGalleryView from '../components/userPreferences/ImageGalleryView.js';
 import MoodBoard from "../components/userPreferences/MoodBoard.js";
+import Homepage from "../components/userPreferences/Homepage.js"
 
 const ArtworkPreferenceOptionsContainer = () => {
 
@@ -47,18 +48,6 @@ const ArtworkPreferenceOptionsContainer = () => {
             console.log(error)
         })
     }
-
-    // const getAllColorArtworks = () => {
-    //     fetch(baseURLColor)
-    //     .then(res => {
-    //         console.log(res); 
-    //         return res.json();
-    //     })
-    //     .then(colorArtworkData => setColorArtworkList(colorArtworkData.objects))
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
-    // }
 
     const color = {
         Pink: "pink",
@@ -224,8 +213,8 @@ const ArtworkPreferenceOptionsContainer = () => {
 
     return (
         <>
-        <div className= "Preference-container"/>
-        <div className="Culture-button-container"/>
+        <div className= "Preference-container">
+        <div className="Culture-button-container">
         <label for="culture"></label> <button id="American" onClick={handleCultureClick}>American</button>
         <label for="culture"></label> <button id="British" onClick={handleCultureClick}>British</button>
         <label for="culture"></label> <button id="Chinese" onClick={handleCultureClick}>Chinese</button>
@@ -241,11 +230,13 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="culture"></label> <button id="Persian" onClick={handleCultureClick}>Persian</button>
         <label for="culture"></label> <button id="Roman" onClick={handleCultureClick}>Roman</button>
         <label for="culture"></label> <button id="Russian" onClick={handleCultureClick}>Russian</button>
-        <div className="Religion-button-container"/>
+        </div>
+        <div className="Religion-button-container">
         <label for="religion"></label> <button id="Christian" onClick={handleReligionClick}>Christian</button>
         <label for="religion"></label> <button id="Islam" onClick={handleReligionClick}>Islam</button>
         <label for="religion"></label> <button id="Jewish" onClick={handleReligionClick}>Jewish</button>
-        <div className="Period-button-container"/>
+        </div>
+        <div className="Period-button-container">
         <label for="period"></label> <button id="Neolithic" onClick={handlePeriodClick}>Neolithic</button>
         <label for="period"></label> <button id="BronzeAge" onClick={handlePeriodClick}>Bronze Age</button>
         <label for="period"></label> <button id="IronAges" onClick={handlePeriodClick}>Iron Ages</button>
@@ -257,8 +248,8 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="period"></label> <button id="QingDynasty" onClick={handlePeriodClick}>Qing Dynasty</button>
         <label for="period"></label> <button id="Edo" onClick={handlePeriodClick}>Edo</button>
         <label for="period"></label> <button id="Modern" onClick={handlePeriodClick}>Modern</button>
-        <div className="Century-button-container"/>
-        <div className="Color-button-container"/>
+        </div>
+        <div className="Century-button-container">
         <label for="century"></label> <button id="12" onClick={handleCenturyClick}>12</button>
         <label for="century"></label> <button id="13" onClick={handleCenturyClick}>13</button>
         <label for="century"></label> <button id="14" onClick={handleCenturyClick}>14</button>
@@ -269,7 +260,31 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="century"></label> <button id="19" onClick={handleCenturyClick}>19</button>
         <label for="century"></label> <button id="20" onClick={handleCenturyClick}>21</button>
         <label for="century"></label> <button id="21" onClick={handleCenturyClick}>20</button>
+        </div>
+        <div className="Color-button-container">
+        <label htmlFor="color"></label>{" "}
         <label for="color"></label> <button id="Pink" onClick={handleColorClick}>Pink</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Orange" onClick={handleColorClick}>Orange</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Grey" onClick={handleColorClick}>Grey</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Yellow" onClick={handleColorClick}>Yellow</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Blue" onClick={handleColorClick}>Blue</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Red" onClick={handleColorClick}>Red</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Black" onClick={handleColorClick}>Black</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Purple" onClick={handleColorClick}>Purple</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="Brown" onClick={handleColorClick}>Brown</button>
+        <label htmlFor="color"></label>{" "}
+        <label for="color"></label> <button id="White" onClick={handleColorClick}>White</button>
+        <label htmlFor="color"></label>{" "}
+        </div>
+    </div>
         <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
         <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
         </>

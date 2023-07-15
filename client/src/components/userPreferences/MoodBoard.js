@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import ImageGalleryView from "./ImageGalleryView";
+import ColorSingleImage from "./ColorSingleImage";
 
 const MoodBoard = ({newMoodBoard, deleteArtworkFromMoodBoard}) => {
 
@@ -16,16 +17,15 @@ const MoodBoard = ({newMoodBoard, deleteArtworkFromMoodBoard}) => {
     }
 
     const moodboardArtwork = newMoodBoard.savedArtworks.map((artwork) => (
-        <div key={artwork.id}>
-          {artwork.images && artwork.images.length > 0 && (
-            <img className="Single-image" src={artwork.images[0].baseimageurl} alt={artwork.title} />
-          )}
-          <p>{artwork.title}</p>
-          <p>{artwork.people && artwork.people.length ? artwork.people[0].name : ""}</p>
-          <button onClick={() => handleDeleteArtwork(artwork.id)}>Delete</button>
-        </div>
-      ));
-
+      <div key={artwork.id}>
+        {artwork.images && artwork.images.length > 0 && (
+          <img className="Single-image" src={artwork.images[0]?.b?.url} alt={artwork.title} />
+        )}
+        <p>{artwork.title}</p>
+        <p>{artwork.people && artwork.people.length ? artwork.people[0].name : ""}</p>
+        <button onClick={() => handleDeleteArtwork(artwork.id)}>Delete</button>
+      </div>
+    ));
 
 
     return (
