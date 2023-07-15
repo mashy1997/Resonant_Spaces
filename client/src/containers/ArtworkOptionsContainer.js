@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { API_KEY } from '../env.js'
+import { API_KEY, API_KEY2 } from '../env.js'
 import ImageGalleryView from '../components/userPreferences/ImageGalleryView.js'
 import MoodBoard from "../components/userPreferences/MoodBoard.js";
 
 const ArtworkPreferenceOptionsContainer = () => {
 
     const[artworkList, setArtworkList] = useState([])
+    const[colorArtworkList, setColorArtworkList] = useState([])
     const[newMoodBoard, setNewMoodBoard] = useState({
         name: "Pink Kitchen",
         savedArtworks: []
@@ -15,6 +16,7 @@ const ArtworkPreferenceOptionsContainer = () => {
 
 
     const baseURL = 'https://api.harvardartmuseums.org/' + API_KEY;
+    // const baseURLColor = 'https://api.collection.cooperhewitt.org/rest/' + API_KEY2; 
 
 
     const getqueryURL = (query) => {
@@ -27,6 +29,7 @@ const ArtworkPreferenceOptionsContainer = () => {
             })
     }
 
+
     const getAllArtworks = () => {
         fetch(baseURL)
             .then(res => res.json())
@@ -35,6 +38,46 @@ const ArtworkPreferenceOptionsContainer = () => {
                 console.log(error)
             })
     }
+
+    const getcolorqueryURL = (color) => {
+        const resultOfFetch = fetch(`https://api.collection.cooperhewitt.org/rest/?method=cooperhewitt.search.objects&access_token=${API_KEY2}&color=${color}&page=1&per_page=20`)
+        .then(data => data.json())
+        .then(artworkColorData => setColorArtworkList(artworkColorData.objects))
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    // const getAllColorArtworks = () => {
+    //     fetch(baseURLColor)
+    //     .then(res => {
+    //         console.log(res); 
+    //         return res.json();
+    //     })
+    //     .then(colorArtworkData => setColorArtworkList(colorArtworkData.objects))
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+    // }
+
+    const color = {
+        Pink: "pink",
+        Orange: "orange",
+        Grey: "grey",
+        Yellow: "yellow",
+        Blue: "blue",
+        Green: "green",
+        Red: "red",
+        Black: "black",
+        Purple: "purple",
+        Brown: "brown",
+        White: "white"
+    }
+    const colorObjectkey = Object.keys(color) 
+    // console.log(colorObjectkey)
+    const colorObjectValue = Object.values(color)
+    // console.log(colorObjectValue)
+
 
     const addArtworkToMoodBoard = (chosenArtwork) => {
         setNewMoodBoard((previousMoodBoard) => {
@@ -168,6 +211,17 @@ const ArtworkPreferenceOptionsContainer = () => {
         getqueryURL(centuryButtonValue)
     }
 
+    const handleColorClick = (evt, id) => {
+        console.log(evt)
+        let colorEvent = evt.target
+        console.log("this is COLOR EVENT:", colorEvent)
+        let colorButtonId = evt.target.getAttribute('id')
+        console.log("COLOR BUTTON:", colorButtonId)
+        let colorButtonValue = color[colorButtonId]
+        console.log("VALUE OF COLOR BUTTON", colorButtonValue)
+        getcolorqueryURL(colorButtonValue)
+    }
+
     return (
         <>
         <div className= "Preference-container"/>
@@ -204,6 +258,7 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="period"></label> <button id="Edo" onClick={handlePeriodClick}>Edo</button>
         <label for="period"></label> <button id="Modern" onClick={handlePeriodClick}>Modern</button>
         <div className="Century-button-container"/>
+        <div className="Color-button-container"/>
         <label for="century"></label> <button id="12" onClick={handleCenturyClick}>12</button>
         <label for="century"></label> <button id="13" onClick={handleCenturyClick}>13</button>
         <label for="century"></label> <button id="14" onClick={handleCenturyClick}>14</button>
@@ -212,9 +267,10 @@ const ArtworkPreferenceOptionsContainer = () => {
         <label for="century"></label> <button id="17" onClick={handleCenturyClick}>17</button>
         <label for="century"></label> <button id="18" onClick={handleCenturyClick}>18</button>
         <label for="century"></label> <button id="19" onClick={handleCenturyClick}>19</button>
-        <label for="century"></label> <button id="20" onClick={handleCenturyClick}>20</button>
-        <label for="century"></label> <button id="21" onClick={handleCenturyClick}>21</button>
-        <ImageGalleryView artworkList={artworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
+        <label for="century"></label> <button id="20" onClick={handleCenturyClick}>21</button>
+        <label for="century"></label> <button id="21" onClick={handleCenturyClick}>20</button>
+        <label for="color"></label> <button id="Pink" onClick={handleColorClick}>Pink</button>
+        <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
         <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
         </>
     )

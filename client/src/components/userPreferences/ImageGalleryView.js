@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import SingleImage from "./SingleImage";
 import MoodBoard from "./MoodBoard";
 
-const ImageGalleryView = ({artworkList, addArtworkToMoodBoard}) => {
+const ImageGalleryView = ({artworkList, colorArtworkList, addArtworkToMoodBoard}) => {
 
     // const handleAddToMoodboard = (chosenArtwork) => {
     //   addArtworkToMoodBoard(chosenArtwork);
@@ -31,14 +31,14 @@ const ImageGalleryView = ({artworkList, addArtworkToMoodBoard}) => {
         <ul>
           {artworkList.map((artwork, index) => {
             const handleAddToMoodboard = () => {
-              addArtworkToMoodBoard(artwork)
+              addArtworkToMoodBoard(artwork);
               console.log("Artwork added to moodboard:", artwork);
             };
-  
+    
             if (!artwork.images || artwork.images.length === 0) {
               return null; // Skip rendering the component if there are no images
             }
-  
+    
             return (
               <div key={index}>
                 <SingleImage artwork={artwork} />
@@ -49,6 +49,7 @@ const ImageGalleryView = ({artworkList, addArtworkToMoodBoard}) => {
         </ul>
       </div>
     );
+
 }
 
 export default ImageGalleryView;

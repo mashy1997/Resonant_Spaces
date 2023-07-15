@@ -7,4 +7,4 @@ const moodBoardSchema = new mongoose.Schema({
 
 const MoodBoard = mongoose.model('MoodBoard', moodBoardSchema);
 
-export default MoodBoard;
+module.exports = MoodBoard;
