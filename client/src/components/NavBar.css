@@ -29,6 +29,15 @@
     margin-top: -75px;
 }
 
+.Title-navbar a{
+    color:black;
+    text-decoration: none;
+}
+
+.Title-navbar a:hover{
+    color: #F09440;
+}
+
 .Title-text{
     white-space: nowrap;
     margin-left: 115px;

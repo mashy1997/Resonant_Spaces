@@ -12,15 +12,14 @@ const NavBar = () => {
       <img src={logo} alt="logo" />
       <h1 className="Title-navbar">
       <span className="Title-text">
+      <Link to="/">
       Resonant Spaces
+      </Link>
       </span>
       </h1>
       </div>
   </div>
     <ul className="NavBar" style={{ listStyleType: 'none'}}>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
       <li>
         <Link to="/about">About</Link>
       </li>
