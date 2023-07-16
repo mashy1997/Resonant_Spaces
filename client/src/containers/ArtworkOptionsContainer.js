@@ -3,9 +3,12 @@ import React, {useState, useEffect} from "react";
 import { API_KEY, API_KEY2 } from '../env.js';
 import ImageGalleryView from '../components/userPreferences/ImageGalleryView.js';
 import MoodBoard from "../components/userPreferences/MoodBoard.js";
-import Homepage from "../components/userPreferences/Homepage.js"
+import Homepage from "../components/userPreferences/Homepage.js";
+import ColorSelection from "../components/userPreferences/ColorSelection.js";
+import ThemeSelection from "../components/userPreferences/ThemeSelection.js";
+import App from "../App.js";
 
-const ArtworkPreferenceOptionsContainer = () => {
+const ArtworkPreferenceOptionsContainer = ({}) => {
 
     const[artworkList, setArtworkList] = useState([])
     const[colorArtworkList, setColorArtworkList] = useState([])
@@ -200,90 +203,29 @@ const ArtworkPreferenceOptionsContainer = () => {
         getqueryURL(centuryButtonValue)
     }
 
-    // const handleColorClick = (evt, id) => {
-    //     console.log(evt)
-    //     let colorEvent = evt.target
-    //     console.log("this is COLOR EVENT:", colorEvent)
-    //     let colorButtonId = evt.target.getAttribute('id')
-    //     console.log("COLOR BUTTON:", colorButtonId)
-    //     let colorButtonValue = color[colorButtonId]
-    //     console.log("VALUE OF COLOR BUTTON", colorButtonValue)
-    //     getcolorqueryURL(colorButtonValue)
-    // }
-
     const handleColorClick = (evt, id) => {
-        const colorButtonId = evt.target.id;
-        const colorButtonValue = color[colorButtonId];
-        getcolorqueryURL(colorButtonValue);
-      };
+        console.log(evt)
+        let colorEvent = evt.target
+        console.log("this is COLOR EVENT:", colorEvent)
+        let colorButtonId = evt.target.getAttribute('id')
+        console.log("COLOR BUTTON:", colorButtonId)
+        let colorButtonValue = color[colorButtonId]
+        console.log("VALUE OF COLOR BUTTON", colorButtonValue)
+        getcolorqueryURL(colorButtonValue)
+    }
+
 
     return (
         <>
         <div className= "Preference-container">
-        <div className="Culture-button-container">
-        <label htmlFor="culture"></label> <button id="American" onClick={handleCultureClick}>American</button>
-        <label htmlFor="culture"></label> <button id="British" onClick={handleCultureClick}>British</button>
-        <label htmlFor="culture"></label> <button id="Chinese" onClick={handleCultureClick}>Chinese</button>
-        <label htmlFor="culture"></label> <button id="Dutch" onClick={handleCultureClick}>Dutch</button>
-        <label htmlFor="culture"></label> <button id="Egyptian" onClick={handleCultureClick}>Egyptian</button>
-        <label htmlFor="culture"></label> <button id="French" onClick={handleCultureClick}>French</button>
-        <label htmlFor="culture"></label> <button id="German" onClick={handleCultureClick}>German</button>
-        <label htmlFor="culture"></label> <button id="Greek" onClick={handleCultureClick}>Greek</button>
-        <label htmlFor="culture"></label> <button id="Indian" onClick={handleCultureClick}>Indian</button>
-        <label htmlFor="culture"></label> <button id="Italian" onClick={handleCultureClick}>Italian</button>
-        <label htmlFor="culture"></label> <button id="Japanese" onClick={handleCultureClick}>Japanese</button>
-        <label htmlFor="culture"></label> <button id="Korean" onClick={handleCultureClick}>Korean</button>
-        <label htmlFor="culture"></label> <button id="Persian" onClick={handleCultureClick}>Persian</button>
-        <label htmlFor="culture"></label> <button id="Roman" onClick={handleCultureClick}>Roman</button>
-        <label htmlFor="culture"></label> <button id="Russian" onClick={handleCultureClick}>Russian</button>
+        <ColorSelection handleColorClick = {handleColorClick}/>
+        <ThemeSelection handleCultureClick = {handleCultureClick} handleReligionClick = {handleReligionClick} handleCenturyClick = {handleCenturyClick} handlePeriodClick = {handlePeriodClick} />
         </div>
-        <div className="Religion-button-container">
-        <label htmlFor="religion"></label> <button id="Christian" onClick={handleReligionClick}>Christian</button>
-        <label htmlFor="religion"></label> <button id="Islam" onClick={handleReligionClick}>Islam</button>
-        <label htmlFor="religion"></label> <button id="Jewish" onClick={handleReligionClick}>Jewish</button>
-        </div>
-        <div className="Period-button-container">
-        <label htmlFor="period"></label> <button id="Neolithic" onClick={handlePeriodClick}>Neolithic</button>
-        <label htmlFor="period"></label> <button id="BronzeAge" onClick={handlePeriodClick}>Bronze Age</button>
-        <label htmlFor="period"></label> <button id="IronAges" onClick={handlePeriodClick}>Iron Ages</button>
-        <label htmlFor="period"></label> <button id="Archaic" onClick={handlePeriodClick}>Archaic</button>
-        <label htmlFor="period"></label> <button id="Geometric" onClick={handlePeriodClick}>Geometric</button>
-        <label htmlFor="period"></label> <button id="Classical" onClick={handlePeriodClick}>Classical</button>
-        <label htmlFor="period"></label> <button id="Mughal" onClick={handlePeriodClick}>Mughal</button>
-        <label htmlFor="period"></label> <button id="Ottoman" onClick={handlePeriodClick}>Ottoman</button>
-        <label htmlFor="period"></label> <button id="QingDynasty" onClick={handlePeriodClick}>Qing Dynasty</button>
-        <label htmlFor="period"></label> <button id="Edo" onClick={handlePeriodClick}>Edo</button>
-        <label htmlFor="period"></label> <button id="Modern" onClick={handlePeriodClick}>Modern</button>
-        </div>
-        <div className="Century-button-container">
-        <label htmlFor="century"></label> <button id="12" onClick={handleCenturyClick}>12</button>
-        <label htmlFor="century"></label> <button id="13" onClick={handleCenturyClick}>13</button>
-        <label htmlFor="century"></label> <button id="14" onClick={handleCenturyClick}>14</button>
-        <label htmlFor="century"></label> <button id="15" onClick={handleCenturyClick}>15</button>
-        <label htmlFor="century"></label> <button id="16" onClick={handleCenturyClick}>16</button>
-        <label htmlFor="century"></label> <button id="17" onClick={handleCenturyClick}>17</button>
-        <label htmlFor="century"></label> <button id="18" onClick={handleCenturyClick}>18</button>
-        <label htmlFor="century"></label> <button id="19" onClick={handleCenturyClick}>19</button>
-        <label htmlFor="century"></label> <button id="20" onClick={handleCenturyClick}>21</button>
-        <label htmlFor="century"></label> <button id="21" onClick={handleCenturyClick}>20</button>
-        </div>
-        <div className="Color-button-container">
-        <label htmlFor="color"></label> <button id="Pink" onClick={handleColorClick}>Pink</button>
-        <label htmlFor="color"></label> <button id="Orange" onClick={handleColorClick}>Orange</button>
-        <label htmlFor="color"></label> <button id="Grey" onClick={handleColorClick}>Grey</button>
-        <label htmlFor="color"></label> <button id="Yellow" onClick={handleColorClick}>Yellow</button>
-        <label htmlFor="color"></label> <button id="Blue" onClick={handleColorClick}>Blue</button>
-        <label htmlFor="color"></label> <button id="Red" onClick={handleColorClick}>Red</button>
-        <label htmlFor="color"></label> <button id="Black" onClick={handleColorClick}>Black</button>
-        <label htmlFor="color"></label> <button id="Purple" onClick={handleColorClick}>Purple</button>
-        <label htmlFor="color"></label> <button id="Brown" onClick={handleColorClick}>Brown</button>
-        <label htmlFor="color"></label> <button id="White" onClick={handleColorClick}>White</button>
-        </div>
-    </div>
         <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
         <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
         </>
     )
+
 }
 
 export default ArtworkPreferenceOptionsContainer;
