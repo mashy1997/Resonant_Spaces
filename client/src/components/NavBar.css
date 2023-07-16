@@ -1,0 +1,50 @@
+.NavBar{
+    font-family: 'EuropaNuova-Bold', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding-right: 40px;
+}
+
+.NavBar li{
+    margin-top: -75px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+}
+
+.NavBar a{
+    color:black;
+    text-decoration: none;
+}
+
+.NavBar a:hover {
+    color: #F09440;
+}
+
+.Title-navbar{
+    font-family: 'EuropaNuova-Bold', sans-serif;
+    text-align: center;
+    margin-top: -75px;
+}
+
+.Title-text{
+    white-space: nowrap;
+    margin-left: 115px;
+}
+
+.Logo img{
+    width: 100px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 40px;
+    padding-top: 30px;
+}

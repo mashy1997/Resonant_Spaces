@@ -1,0 +1,18 @@
+html, body {
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'HK Groteks', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  #root {
+    flex: 1;
+  }
+
