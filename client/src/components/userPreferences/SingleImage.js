@@ -1,5 +1,6 @@
-import React from "react"
-import "./SingleImage.css"
+import React from 'react';
+import './SingleImage.css';
+
 
 const SingleImage = ({artwork}) => {
     if (!artwork.images || artwork.images.length === 0) {

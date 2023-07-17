@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const MoodBoard = require('../moodboardServer'); 
 
-const createRouter = function (collection) {
+const createRouter = function (collection, MoodBoard) {
+
     
     // Fetching all moodboards
     router.get("/", (req, res) => {
@@ -20,6 +20,8 @@ const createRouter = function (collection) {
     // Creating a new moodboard
     router.post("/", (req, res) => {
         const { name, savedArtworks } = req.body;
+        console.log("request body below ")
+        console.log(req.body )
 
         if (!name || !savedArtworks) {
             return res
@@ -27,43 +29,45 @@ const createRouter = function (collection) {
                 .json({ message: "Name and saved artworks are required for a moodboard" });
         }
 
-        const moodboard = new MoodBoard({ name, savedArtworks });
-
-        moodboard
-            .save()
-            .then((savedMoodBoard) => {
-                res.status(201).json(savedMoodBoard);
-            })
-            .catch((error) => {
-                console.log("Error creating MoodBoard", error);
-                res.status(500).send("Error creating MoodBoard");
-            });
+        const moodBoard = new MoodBoard({ name, savedArtworks });
+        
+        moodBoard
+        .save()
+        .then((savedMoodBoard) => {
+            res.status(201).json(savedMoodBoard);
+        })
+        .catch((error) => {
+            console.log("Error creating MoodBoard", error);
+            res.status(500).send("Error creating MoodBoard");
+        });
+      
+           
     });
 
     // Updating a moodboard
-    router.put("/:id", (req, res) => {
-        const { id } = req.params;
-        const { name, savedArtworks } = req.body;
+    // router.put("/:id", (req, res) => {
+    //     const { id } = req.params;
+    //     const { name, savedArtworks } = req.body;
 
-        if (!name || !savedArtworks) {
-            return res
-                .status(400)
-                .json({ message: "Name and saved artworks are required for a moodboard" });
-        }
+    //     if (!name || !savedArtworks) {
+    //         return res
+    //             .status(400)
+    //             .json({ message: "Name and saved artworks are required for a moodboard" });
+    //     }
 
-        MoodBoard.findOneAndUpdate(
-            { _id: id },
-            { name, savedArtworks },
-            { new: true }
-        )
-            .then((updatedMoodBoard) => {
-                res.status(200).json(updatedMoodBoard);
-            })
-            .catch((error) => {
-                console.log("Error updating MoodBoard", error);
-                res.status(500).send("Error updating MoodBoard");
-            });
-    });
+    //     MoodBoard.findOneAndUpdate(
+    //         { _id: id },
+    //         { name, savedArtworks },
+    //         { new: true }
+    //     )
+    //         .then((updatedMoodBoard) => {
+    //             res.status(200).json(updatedMoodBoard);
+    //         })
+    //         .catch((error) => {
+    //             console.log("Error updating MoodBoard", error);
+    //             res.status(500).send("Error updating MoodBoard");
+    //         });
+    // });
 
     // Deleting a moodboard 
     router.delete("/:id", (req, res) => {

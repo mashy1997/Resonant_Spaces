@@ -6,6 +6,7 @@ import MoodBoard from "../components/userPreferences/MoodBoard.js";
 import Homepage from "../components/userPreferences/Homepage.js";
 import ColorSelection from "../components/userPreferences/ColorSelection.js";
 import ThemeSelection from "../components/userPreferences/ThemeSelection.js";
+import MoodBoards from "../components/userPreferences/MoodBoards.js";
 import App from "../App.js";
 
 const ArtworkPreferenceOptionsContainer = ({}) => {
@@ -16,6 +17,10 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
         name: "Pink Kitchen",
         savedArtworks: []
     })
+    // const [newMoodBoard, setNewMoodBoard] = useState({
+    //     name: "",
+    //     savedArtworks: []
+    //   });
     const[allMoodBoards, setAllMoodBoards] = useState([])
 
 
@@ -51,6 +56,31 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
             console.log(error)
         })
     }
+
+    const fetchMoodBoards = async () => {
+        try {
+          const response = await fetch("http://localhost:9001/api/moodboards/");
+          const data = await response.json();
+          setAllMoodBoards(data);
+        } catch (error) {
+          console.log("Error fetching moodboards:", error);
+        }
+      };
+
+      console.log("THIS IS FETCH MOODBOARDS:", fetchMoodBoards)
+    
+      useEffect(() => {
+        fetchMoodBoards();
+      }, []);
+
+
+    // const createMoodBoard = (name) => {
+    //     const moodBoard = {
+    //       name: name,
+    //       savedArtworks: []
+    //     };
+    //     setAllMoodBoards((prevMoodBoards) => [...prevMoodBoards, moodBoard]);
+    //   };
 
     const color = {
         Pink: "pink",
@@ -222,7 +252,9 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
         <ThemeSelection handleCultureClick = {handleCultureClick} handleReligionClick = {handleReligionClick} handleCenturyClick = {handleCenturyClick} handlePeriodClick = {handlePeriodClick} />
         </div>
         <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
+        {/* <MoodBoardForm createMoodBoard={createMoodBoard} /> */}
         <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
+        <MoodBoards moodboards={allMoodBoards} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
         </>
     )
 
