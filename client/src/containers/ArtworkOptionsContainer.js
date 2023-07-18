@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { API_KEY, API_KEY2 } from '../env.js';
-import ImageGalleryView from '../components/userPreferences/ImageGalleryView.js';
 import MoodBoard from "../components/userPreferences/MoodBoard.js";
 import Homepage from "../components/userPreferences/Homepage.js";
 import ColorSelection from "../components/userPreferences/ColorSelection.js";
 import ThemeSelection from "../components/userPreferences/ThemeSelection.js";
 import MoodBoards from "../components/userPreferences/MoodBoards.js";
-import App from "../App.js";
+import SelectMoodBoard from "../components/userPreferences/SelectMoodBoard.js";
+import ImageGalleryView from "../components/userPreferences/ImageGalleryView.js";
 
 const ArtworkPreferenceOptionsContainer = ({}) => {
 
@@ -22,6 +22,8 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
     //     savedArtworks: []
     //   });
     const[allMoodBoards, setAllMoodBoards] = useState([])
+    const [selectedMoodboard, setSelectedMoodboard] = useState("");
+
 
 
     const baseURL = 'https://api.harvardartmuseums.org/' + API_KEY;
@@ -82,6 +84,10 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
     //     setAllMoodBoards((prevMoodBoards) => [...prevMoodBoards, moodBoard]);
     //   };
 
+
+    //Imagegalleryview needs to be given moodboards, so can present dropdown select menu with an option for each moodboard and once particular one says add to moodboard it would feed through ID of currently selected moodbaord, form is to say this is the one id like to add. 
+    //Replace addmoodbutton with a form
+    //handling an event, event.target.value and onclick events, trying to pass props, state needs to be added to caapture that is click
     const color = {
         Pink: "pink",
         Orange: "orange",
@@ -101,16 +107,25 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
     // console.log(colorObjectValue)
 
 
-    const addArtworkToMoodBoard = (chosenArtwork) => {
-        setNewMoodBoard((previousMoodBoard) => {
-            const updatedMoodBoard = {...previousMoodBoard }
-            const copyOfsavedArtworks = [...updatedMoodBoard.savedArtworks]
-            copyOfsavedArtworks.push(chosenArtwork)
-            return {
-                ...updatedMoodBoard,
-                savedArtworks: copyOfsavedArtworks
+    const addArtworkToMoodBoard = (chosenArtwork, selectedMoodBoardID) => {
+        // Check if a moodboard is selected
+
+        console.log("addArtWorkTomOOdBoard is being called")
+        console.log({chosenArtwork})
+        console.log({selectedMoodBoardID})
+        if (selectedMoodBoardID) {
+          const updatedMoodBoards = allMoodBoards.map((moodboard) => {
+            if (moodboard._id === selectedMoodBoardID) {
+              return {
+                ...moodboard,
+                savedArtworks: [...moodboard.savedArtworks, chosenArtwork],
+              };
+            } else {
+              return moodboard;
             }
-        })
+          });
+          setAllMoodBoards(updatedMoodBoards);
+        }
     };
 
     const deleteArtworkFromMoodBoard = (artworkId) => {
@@ -122,7 +137,14 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
           updatedMoodBoard.savedArtworks = updatedSavedArtworks;
           return updatedMoodBoard;
         });
-      };
+    };
+
+
+    const deleteMoodboard = (moodboardId) => {
+    setAllMoodBoards((prevMoodboards) =>
+        prevMoodboards.filter((moodboard) => moodboard._id !== moodboardId)
+    );
+    };
 
 
     const culture = {
@@ -244,17 +266,18 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
         getcolorqueryURL(colorButtonValue)
     }
 
-
     return (
         <>
         <div className= "Preference-container">
         <ColorSelection handleColorClick = {handleColorClick}/>
         <ThemeSelection handleCultureClick = {handleCultureClick} handleReligionClick = {handleReligionClick} handleCenturyClick = {handleCenturyClick} handlePeriodClick = {handlePeriodClick} />
         </div>
-        <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard}/>
+        <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard} moodboards={allMoodBoards}/>
         {/* <MoodBoardForm createMoodBoard={createMoodBoard} /> */}
         <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
-        <MoodBoards moodboards={allMoodBoards} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
+        <MoodBoards moodboards={allMoodBoards} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard} deleteMoodboard={deleteMoodboard}/>
+        <SelectMoodBoard moodboards={allMoodBoards} selectedMoodboard={selectedMoodboard} setSelectedMoodboard={setSelectedMoodboard}
+        />
         </>
     )
 

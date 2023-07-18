@@ -2,7 +2,7 @@ import React from "react";
 
 const ThemeSelection = ({ handleCultureClick, handleReligionClick, handlePeriodClick, handleCenturyClick }) => {
 
-  console.log(handleCenturyClick, handleReligionClick, handlePeriodClick, handleCultureClick)
+  console.log({handleCenturyClick}, {handleReligionClick}, {handlePeriodClick}, {handleCultureClick})
 
 
     return (

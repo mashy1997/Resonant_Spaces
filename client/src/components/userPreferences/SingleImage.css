@@ -1,6 +1,23 @@
-.Single-image{
-    max-width: 50%;
-    height: 30%;
+/* .Single-image{
     flex-wrap: wrap;
     flex-flow: space-evenly;
+    /* border: 15px double black; */
+    /* border: 5px solid black;
+    border-radius: 10px;
+    width:  350px;
+    height: 350px;
+    object-fit: fill;
+} */
+/* 
+.Single-image-component{
+
+} */
+
+.Single-image {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:10px;
+    width: 370px;
+    height: 350px;
 }

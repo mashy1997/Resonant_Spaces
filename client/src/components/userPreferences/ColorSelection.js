@@ -2,7 +2,7 @@ import React from "react";
 
 const ColorSelection = ({ handleColorClick }) => {
 
-  console.log(handleColorClick)
+  console.log({handleColorClick})
 
     return (
         <div className="Color-button-container">

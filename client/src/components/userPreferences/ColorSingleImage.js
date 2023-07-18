@@ -3,7 +3,7 @@ import "./SingleImage.css";
 
 const ColorSingleImage = ({artworkColor}) => {
 
-    console.log(artworkColor)
+    console.log({artworkColor})
     
     if (!artworkColor.images || artworkColor.images.length === 0) {
         return null; // Skip rendering if there are no images
