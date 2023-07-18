@@ -14,12 +14,12 @@ const SingleImage = ({artwork}) => {
     return(
         <>
         <div className="Single-image-component">
-        <li>
+        {/* <li> */}
         {/* <img className="Single-image" src={artwork.images[0].baseimageurl} alt="list of art"/> */}
         <img className="Single-image" src={artwork.images && artwork.images.length ? artwork.images[0].baseimageurl :null}/>
         <p className="Artwork-description">{artwork.title === undefined ? "" : artwork.title}</p>
         <p className="Artwork-description">{artwork.people === undefined ? "" : artwork.people[0].name}</p>
-        </li>
+        {/* </li> */}
         </div>
         </>
     )

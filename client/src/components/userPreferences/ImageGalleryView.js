@@ -9,13 +9,14 @@ const ImageGalleryView = ({
   addArtworkToMoodBoard,
   moodboards,
 }) => {
+
   const [selectedMoodboardId, setSelectedMoodboardId] = useState("");
 
   const handleAddToMoodboard = (artwork) => {
     if (selectedMoodboardId) {
-      addArtworkToMoodBoard(artwork, selectedMoodboardId);
+      addArtworkToMoodBoard(artwork, selectedMoodboardId); //
     } else {
-      alert("Please select a moodboard.");
+      alert("Please select a moodboard."); 
     }
   };
 
@@ -25,18 +26,18 @@ const ImageGalleryView = ({
   };
 
 
-  
 
   return (
     <div className="Image-gallery-view-component">
       <ul>
         {artworkList.map((artwork, index) => {
-       
-
           if (!artwork.images || artwork.images.length === 0) {
             return null; // Skip rendering the component if there are no images
           }
-
+          {/* {artworkList.map((artwork, index) => {
+          if (!artwork.images || artwork.images.length === 0) {
+            return null;
+          } */}
           return (
             <div key={index}>
               <SingleImage artwork={artwork} />

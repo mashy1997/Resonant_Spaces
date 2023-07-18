@@ -76,6 +76,8 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
       }, []);
 
 
+    // const updateMoodBoard =   
+
     // const createMoodBoard = (name) => {
     //     const moodBoard = {
     //       name: name,
@@ -118,7 +120,7 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
             if (moodboard._id === selectedMoodBoardID) {
               return {
                 ...moodboard,
-                savedArtworks: [...moodboard.savedArtworks, chosenArtwork],
+                savedArtworks: [...moodboard.savedArtworks, chosenArtwork], //updatemoodboard here AFTER THIS
               };
             } else {
               return moodboard;
