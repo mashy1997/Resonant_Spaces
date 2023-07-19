@@ -1,0 +1,626 @@
+.Color-button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 65px;
+    margin-bottom: 70px;
+    gap: 25px;
+}
+
+.pink-button {
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: pink;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.pink-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.pink-button:active {
+    color: pink;
+}
+
+.pink-button:active:after {
+    background: transparent;
+}
+
+.pink-button:hover:before {
+    opacity: 1;
+}
+
+.pink-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: pink;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
+
+.orange-button {
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: orange;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.orange-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.orange-button:active {
+    color: pink;
+}
+
+.orange-button:active:after {
+    background: transparent;
+}
+
+.orange-button:hover:before {
+    opacity: 1;
+}
+
+.orange-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: orange;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
+
+.grey-button{
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: grey;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.grey-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.grey-button:active {
+    color: grey;
+}
+
+.grey-button:active:after {
+    background: transparent;
+}
+
+.grey-button:hover:before {
+    opacity: 1;
+}
+
+.grey-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: grey;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.yellow-button{
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: #FDDA0D;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.yellow-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.yellow-button:active {
+    color: #FDDA0D;
+}
+
+.yellow-button:active:after {
+    background: transparent;
+}
+
+.yellow-button:hover:before {
+    opacity: 1;
+}
+
+.yellow-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #FDDA0D;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.blue-button {
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: #87CEEB;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.blue-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.blue-button:active {
+    color: #87CEEB;
+}
+
+.blue-button:active:after {
+    background: transparent;
+}
+
+.blue-button:hover:before {
+    opacity: 1;
+}
+
+.blue-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #87CEEB;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
+
+.red-button {
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: red;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.red-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.red-button:active {
+    color: red;
+}
+
+.red-button:active:after {
+    background: transparent;
+}
+
+.red-button:hover:before {
+    opacity: 1;
+}
+
+.red-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: red;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
+
+.black-button {
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: black;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.black-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.black-button:active {
+    color: black;
+}
+
+.black-button:active:after {
+    background: transparent;
+}
+
+.black-button:hover:before {
+    opacity: 1;
+}
+
+.black-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
+
+.purple-button {
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: #CF9FFF;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.purple-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.purple-button:active {
+    color: #CF9FFF;
+}
+
+.purple-button:active:after {
+    background: transparent;
+}
+
+.purple-button:hover:before {
+    opacity: 1;
+}
+
+.purple-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #CF9FFF;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
+
+.brown-button {
+    width: 75px;
+    height: 45px;
+    border: none;
+    outline: none;
+    color: white;
+    background: brown;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.brown-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.brown-button:active {
+    color: brown;
+}
+
+.brown-button:active:after {
+    background: transparent;
+}
+
+.brown-button:hover:before {
+    opacity: 1;
+}
+
+.brown-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: brown;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
+
+
+.white-button {
+    width: 75px;
+    height: 45px;
+    border-color: black;
+    outline: none;
+    color: black;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-family:'HK Grotesk';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.white-button:before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.white-button:active {
+    color: white;
+}
+
+.white-button:active:after {
+    background: transparent;
+}
+
+.white-button:hover:before {
+    opacity: 1;
+}
+
+.white-button:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+} 
