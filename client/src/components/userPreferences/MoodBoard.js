@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import ImageGalleryView from "./ImageGalleryView";
 import ColorSingleImage from "./ColorSingleImage";
+import "./MoodBoard.css"
 
 const MoodBoard = ({newMoodBoard, deleteArtworkFromMoodBoard}) => {
 
@@ -24,15 +25,15 @@ const MoodBoard = ({newMoodBoard, deleteArtworkFromMoodBoard}) => {
         )}
         <p>{artwork.title}</p>
         <p>{artwork.people && artwork.people.length ? artwork.people[0].name : ""}</p>
-        <button onClick={() => handleDeleteArtwork(artwork.id, newMoodBoard)}>Delete Artwork</button>
+        <button className="otherdeletemoodboard" onClick={() => handleDeleteArtwork(artwork.id, newMoodBoard)}>❌</button>
       </div>
     ));
 
     return (
         <>
         <div className="Moodboard-component">
-        <h2>{newMoodBoard.name}</h2>
-        <button onClick={viewMoodboard}>View MoodBoard</button>
+        <h2 className="moodboardname">{newMoodBoard.name}</h2>
+        <button className="viewmoodboard" onClick={viewMoodboard}>View MoodBoard</button>
         {isShowingArtwork && moodboardArtwork}
         </div>
         </>

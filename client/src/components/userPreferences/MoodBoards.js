@@ -1,5 +1,6 @@
 import React from "react";
 import MoodBoard from "./MoodBoard";
+import "./MoodBoards.css"
 
 const Moodboards = ({ moodboards, deleteArtworkFromMoodBoard, deleteMoodboard }) => {
   const handleDeleteArtwork = (moodboardId, artworkId) => {
@@ -10,7 +11,7 @@ const Moodboards = ({ moodboards, deleteArtworkFromMoodBoard, deleteMoodboard })
   return (
     <>
       <div className="Moodboards-component">
-        <h2>Moodboards</h2>
+        <h2 className="moodboards-header">Moodboards</h2>
         {moodboards.map((moodboard) => (
           <div key={moodboard._id} className="Moodboard">
             <MoodBoard
@@ -18,8 +19,8 @@ const Moodboards = ({ moodboards, deleteArtworkFromMoodBoard, deleteMoodboard })
               newMoodBoard={moodboard}
               deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}
             />
-            <button onClick={() => deleteMoodboard(moodboard._id)}>
-              Delete MoodBoard
+            <button className="delete-moodboard" onClick={() => deleteMoodboard(moodboard._id)}>
+            ❌
             </button>
           </div>
         ))}

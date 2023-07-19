@@ -1,0 +1,15 @@
+.moodboards-header{
+    display: flex;
+    justify-content: center;
+    font-family: 'HK Grotesk';
+    font-weight: bold;
+    font-size: 28px;;
+}
+
+.delete-moodboard{
+    margin-left: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: none;
+}

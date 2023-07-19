@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SingleImage from "./SingleImage";
 import MoodBoard from "./MoodBoard";
 import ColorSingleImage from "./ColorSingleImage";
+import "./ImageGalleryView.css"
 
 const ImageGalleryView = ({
   artworkList,
@@ -29,8 +30,8 @@ const ImageGalleryView = ({
 
 
   return (
-    <div className="Image-gallery-view-component">
-      <ul>
+    <div>
+      <ul className="Image-gallery-view-component">
         {artworkList.map((artwork, index) => {
           if (!artwork.images || artwork.images.length === 0) {
             return null; // Skip rendering the component if there are no images
@@ -48,13 +49,13 @@ const ImageGalleryView = ({
                 ))}
               </select>
             </div>
-            <button onClick={() => {handleAddToMoodboard(artwork)}}>Add to Moodboard</button>
-
+            <button className="add-to-moodboard-button" onClick={() => {handleAddToMoodboard(artwork)}}>Add to Moodboard
+            </button>
             </div>
           );
         })}
       </ul>
-      <ul>
+      <ul className="Image-gallery-view-component">
         {colorArtworkList.map((artworkColor, index) => {
 
           return (

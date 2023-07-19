@@ -1,0 +1,62 @@
+.Moodboard-component{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+}
+
+.moodboardname{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: 'HK Grotesk';
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.otherdeletemoodboard{
+    background-color: transparent;
+    border: none;
+    margin-left: 160px;
+}
+
+.viewmoodboard {
+    width: 140px;
+    height: 50px;
+    margin-left: 130px;
+    font-family: 'HK Grotesk', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    background-color: transparent;
+    border: 0.115em solid black;
+    border-radius: 0.9375em;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    line-height: normal;
+    outline: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+  }
+  
+  .viewmoodboard:disabled {
+    pointer-events: none;
+  }
+  
+  .viewmoodboard:hover {
+    color: #fff;
+    background-color: #F09440;
+    border-color: #F09440;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .viewmoodboard:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }

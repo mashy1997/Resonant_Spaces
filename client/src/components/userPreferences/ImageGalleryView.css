@@ -1,5 +1,9 @@
 .Image-gallery-view-component{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+    font-family: 'HK Grotesk';
+    font-weight: bold;
+    font-size: 12px;
+} 
+
