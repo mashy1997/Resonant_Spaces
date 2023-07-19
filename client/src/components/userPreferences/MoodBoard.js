@@ -25,6 +25,7 @@ const MoodBoard = ({newMoodBoard, deleteArtworkFromMoodBoard}) => {
         <p>{artwork.title}</p>
         <p>{artwork.people && artwork.people.length ? artwork.people[0].name : ""}</p>
         <button onClick={() => handleDeleteArtwork(artwork.id)}>Delete</button>
+        {/* <button  */}
       </div>
     ));
 

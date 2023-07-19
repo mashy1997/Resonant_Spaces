@@ -8,6 +8,7 @@ const ImageGalleryView = ({
   colorArtworkList,
   addArtworkToMoodBoard,
   moodboards,
+  // updateMoodBoard
 }) => {
 
   const [selectedMoodboardId, setSelectedMoodboardId] = useState("");
@@ -33,11 +34,7 @@ const ImageGalleryView = ({
         {artworkList.map((artwork, index) => {
           if (!artwork.images || artwork.images.length === 0) {
             return null; // Skip rendering the component if there are no images
-          }
-          {/* {artworkList.map((artwork, index) => {
-          if (!artwork.images || artwork.images.length === 0) {
-            return null;
-          } */}
+          } 
           return (
             <div key={index}>
               <SingleImage artwork={artwork} />

@@ -6,21 +6,17 @@ import Homepage from "../components/userPreferences/Homepage.js";
 import ColorSelection from "../components/userPreferences/ColorSelection.js";
 import ThemeSelection from "../components/userPreferences/ThemeSelection.js";
 import MoodBoards from "../components/userPreferences/MoodBoards.js";
-import SelectMoodBoard from "../components/userPreferences/SelectMoodBoard.js";
 import ImageGalleryView from "../components/userPreferences/ImageGalleryView.js";
+import MoodBoardForm from "../containers/MoodBoardForm.js";
 
 const ArtworkPreferenceOptionsContainer = ({}) => {
 
     const[artworkList, setArtworkList] = useState([])
     const[colorArtworkList, setColorArtworkList] = useState([])
-    const[newMoodBoard, setNewMoodBoard] = useState({
-        name: "Pink Kitchen",
+    const [newMoodBoard, setNewMoodBoard] = useState({
+        name: "",
         savedArtworks: []
-    })
-    // const [newMoodBoard, setNewMoodBoard] = useState({
-    //     name: "",
-    //     savedArtworks: []
-    //   });
+      });
     const[allMoodBoards, setAllMoodBoards] = useState([])
     const [selectedMoodboard, setSelectedMoodboard] = useState("");
 
@@ -76,20 +72,114 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
       }, []);
 
 
-    // const updateMoodBoard =   
+    const updateMoodBoardFetch = async (moodboard) =>  {
+        console.log("I AM UPDATING MOODBOARD")
+    await fetch("http://localhost:9001/api/moodboards/" + moodboard._id, {
+      method: 'PUT',
+      body: JSON.stringify(moodboard),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json());
+  }
 
-    // const createMoodBoard = (name) => {
-    //     const moodBoard = {
-    //       name: name,
-    //       savedArtworks: []
-    //     };
-    //     setAllMoodBoards((prevMoodBoards) => [...prevMoodBoards, moodBoard]);
-    //   };
+      const updateMoodBoard = (moodBoardId, updatedMoodBoardData) => {
+    // Implement the logic to update the moodboard using the provided moodboardId and updatedMoodBoard
+        const updatedMoodBoards = allMoodBoards.map((moodboard) => {
+          if (moodboard._id === moodBoardId) {
+            return {
+              ...moodboard,
+              ...updatedMoodBoardData,
+            };
+          } else {
+            return moodboard;
+          }
+        });
+        setAllMoodBoards(updatedMoodBoards);
+      };
 
 
-    //Imagegalleryview needs to be given moodboards, so can present dropdown select menu with an option for each moodboard and once particular one says add to moodboard it would feed through ID of currently selected moodbaord, form is to say this is the one id like to add. 
-    //Replace addmoodbutton with a form
-    //handling an event, event.target.value and onclick events, trying to pass props, state needs to be added to caapture that is click
+    const createMoodBoard = (name) => {
+        const moodBoard = {
+          name: name,
+          savedArtworks: []
+        };
+        setAllMoodBoards((prevMoodBoards) => [...prevMoodBoards, moodBoard]);
+    };
+
+
+    const postCreateMoodBoard = async (moodboard) => {
+      await fetch("http://localhost:9001/api/moodboards/" + moodboard._id, {
+        method: 'POST',
+        body: JSON.stringify(moodboard),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json());
+    };
+
+
+    const addArtworkToMoodBoard = (chosenArtwork, selectedMoodBoardID) => {
+        // Check if a moodboard is selected
+        if (selectedMoodBoardID) {
+          const updatedMoodBoards = allMoodBoards.map((moodboard) => {
+            if (moodboard._id === selectedMoodBoardID) {
+              const updatedMoodBoard = {
+                ...moodboard,
+                savedArtworks: [...moodboard.savedArtworks, chosenArtwork],
+              };
+              updateMoodBoard(selectedMoodBoardID, updatedMoodBoard); // Call the updateMoodBoard function
+              console.log("HIIIIIIIIIII:", updatedMoodBoard)
+              updateMoodBoardFetch(updatedMoodBoard)
+              return updatedMoodBoard;
+            } else {
+              return moodboard;
+            }
+          });
+          setAllMoodBoards(updatedMoodBoards);
+        }
+      };
+
+    // const deleteArtworkFromMoodBoard = (artworkId) => {
+    //     setNewMoodBoard((previousMoodBoard) => {
+    //       const updatedMoodBoard = { ...previousMoodBoard };
+    //       const updatedSavedArtworks = updatedMoodBoard.savedArtworks.filter(
+    //         (artwork) => artwork.id !== artworkId
+    //       );
+    //       updatedMoodBoard.savedArtworks = updatedSavedArtworks;
+    //       return updatedMoodBoard;
+    //     });
+    // };
+
+    const deleteArtworkFromMoodBoard = async (artworkId, moodboardId) => {
+      try {
+        // Create a copy of the current moodboard
+        const updatedMoodBoard = { ...newMoodBoard };
+    
+        // Filter out the artwork to be deleted from the savedArtworks array
+        updatedMoodBoard.savedArtworks = updatedMoodBoard.savedArtworks.filter(
+          (artwork) => artwork.id !== artworkId
+        );
+    
+        // Update the moodboard in the backend
+        await updateMoodBoardFetch(updatedMoodBoard);
+    
+        // Update the moodboard state with the updated moodboard
+        setNewMoodBoard(updatedMoodBoard);
+      } catch (error) {
+        console.log("Error deleting artwork from MoodBoard:", error);
+      }
+    };
+
+
+    const deleteMoodboard = (moodboardId) => {
+    setAllMoodBoards((prevMoodboards) =>
+        prevMoodboards.filter((moodboard) => moodboard._id !== moodboardId)
+    );
+    };
+
     const color = {
         Pink: "pink",
         Orange: "orange",
@@ -107,46 +197,6 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
     // console.log(colorObjectkey)
     const colorObjectValue = Object.values(color)
     // console.log(colorObjectValue)
-
-
-    const addArtworkToMoodBoard = (chosenArtwork, selectedMoodBoardID) => {
-        // Check if a moodboard is selected
-
-        console.log("addArtWorkTomOOdBoard is being called")
-        console.log({chosenArtwork})
-        console.log({selectedMoodBoardID})
-        if (selectedMoodBoardID) {
-          const updatedMoodBoards = allMoodBoards.map((moodboard) => {
-            if (moodboard._id === selectedMoodBoardID) {
-              return {
-                ...moodboard,
-                savedArtworks: [...moodboard.savedArtworks, chosenArtwork], //updatemoodboard here AFTER THIS
-              };
-            } else {
-              return moodboard;
-            }
-          });
-          setAllMoodBoards(updatedMoodBoards);
-        }
-    };
-
-    const deleteArtworkFromMoodBoard = (artworkId) => {
-        setNewMoodBoard((previousMoodBoard) => {
-          const updatedMoodBoard = { ...previousMoodBoard };
-          const updatedSavedArtworks = updatedMoodBoard.savedArtworks.filter(
-            (artwork) => artwork.id !== artworkId
-          );
-          updatedMoodBoard.savedArtworks = updatedSavedArtworks;
-          return updatedMoodBoard;
-        });
-    };
-
-
-    const deleteMoodboard = (moodboardId) => {
-    setAllMoodBoards((prevMoodboards) =>
-        prevMoodboards.filter((moodboard) => moodboard._id !== moodboardId)
-    );
-    };
 
 
     const culture = {
@@ -275,11 +325,9 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
         <ThemeSelection handleCultureClick = {handleCultureClick} handleReligionClick = {handleReligionClick} handleCenturyClick = {handleCenturyClick} handlePeriodClick = {handlePeriodClick} />
         </div>
         <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard} moodboards={allMoodBoards}/>
-        {/* <MoodBoardForm createMoodBoard={createMoodBoard} /> */}
-        <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}/>
+        <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard} />
+        <MoodBoardForm createMoodBoard={createMoodBoard}/>
         <MoodBoards moodboards={allMoodBoards} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard} deleteMoodboard={deleteMoodboard}/>
-        <SelectMoodBoard moodboards={allMoodBoards} selectedMoodboard={selectedMoodboard} setSelectedMoodboard={setSelectedMoodboard}
-        />
         </>
     )
 

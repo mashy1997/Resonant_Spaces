@@ -5,6 +5,7 @@ import Homepage from "./components/userPreferences/Homepage";
 import AboutSection from "./components/userPreferences/AboutSection";
 import ArtworkPreferenceOptionsContainer from "./containers/ArtworkOptionsContainer";
 import ErrorPage from "./components/userPreferences/ErrorPage";
+import MoodBoardForm from "./containers/MoodBoardForm";
 // import ColorSelection from "./components/userPreferences/ColorSelection";
 // import ThemeSelection from "./components/userPreferences/ThemeSelection";
 // import Moodboards from "./components/userPreferences/MoodBoards";
@@ -22,8 +23,10 @@ function App() {
         <Route path="/theme" element={<ArtworkPreferenceOptionsContainer />} />
         <Route path="/artwork" element={<ArtworkPreferenceOptionsContainer />} />
         {/* <Route path="/moodboards" element={<MoodBoard />} /> */}
+        {/* <Route path="/newmoodboard" element={< MoodBoardForm  />} /> */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      
     </Router>
   );
 }
