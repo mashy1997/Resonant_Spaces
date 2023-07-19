@@ -16,12 +16,12 @@ const MoodBoardForm = ({ createMoodBoard }) => {
 
   return (
     <>
-    <form onSubmit={handleSubmit} className="MoodBoard-form">
-      <label>
-        <input type="text" value={name} onChange={handleNameChange} />
-      </label>
-      <button type="submit">Create MoodBoard</button>
+    <div className="moodboard-form-container">
+    <form onSubmit={handleSubmit} className="moodboard-form">
+        <input type="text" value={name} onChange={handleNameChange} placeholder="MoodBoard Name"/>
+      <button type="submit" className="create-moodboard-button">Create MoodBoard</button>
     </form>
+    </div>
     </>
   );
 };
