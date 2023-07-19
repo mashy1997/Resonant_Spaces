@@ -6,17 +6,21 @@ const Moodboards = ({ moodboards, deleteArtworkFromMoodBoard, deleteMoodboard })
     deleteArtworkFromMoodBoard(moodboardId, artworkId);
   };
 
-  //here do a button with handleclick/onclick passing in deleteMoodboard
-  //const handleDeleteMoodboard = (artworkId?) => {
-  //deleteMoodboard(artworkId)
-  //}
+ 
   return (
     <>
       <div className="Moodboards-component">
-        <h2>Moodboards helooooo</h2>
+        <h2>Moodboards</h2>
         {moodboards.map((moodboard) => (
           <div key={moodboard._id} className="Moodboard">
-            <MoodBoard newMoodBoard={moodboard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard} />
+            <MoodBoard
+              key={moodboard._id}
+              newMoodBoard={moodboard}
+              deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard}
+            />
+            <button onClick={() => deleteMoodboard(moodboard._id)}>
+              Delete MoodBoard
+            </button>
           </div>
         ))}
       </div>

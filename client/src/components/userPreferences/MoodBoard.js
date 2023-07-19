@@ -12,23 +12,21 @@ const MoodBoard = ({newMoodBoard, deleteArtworkFromMoodBoard}) => {
         // return(moodboardDisplay)
     }
 
-    const handleDeleteArtwork = (artworkId) => {
-        deleteArtworkFromMoodBoard(artworkId)
+    const handleDeleteArtwork = (artworkId, newMoodBoard) => {
+        deleteArtworkFromMoodBoard(artworkId, newMoodBoard)
     }
     
 
-    const moodboardArtwork = newMoodBoard.savedArtworks.map((artwork) => (
-      <div key={artwork.id}>
+    const moodboardArtwork = newMoodBoard.savedArtworks.map((artwork, index) => (
+      <div key={artwork._id || index}>
         {artwork.images && artwork.images.length > 0 && (
-        <img className="Single-image" src={artwork.contact ? artwork.images[0].baseimageurl : artwork.images[0]?.b?.url}/>
+          <img className="Single-image" src={artwork.contact ? artwork.images[0].baseimageurl : artwork.images[0]?.b?.url}/>
         )}
         <p>{artwork.title}</p>
         <p>{artwork.people && artwork.people.length ? artwork.people[0].name : ""}</p>
-        <button onClick={() => handleDeleteArtwork(artwork.id)}>Delete</button>
-        {/* <button  */}
+        <button onClick={() => handleDeleteArtwork(artwork.id, newMoodBoard)}>Delete Artwork</button>
       </div>
     ));
-
 
     return (
         <>

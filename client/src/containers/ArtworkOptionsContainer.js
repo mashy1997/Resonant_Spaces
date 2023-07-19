@@ -8,6 +8,7 @@ import ThemeSelection from "../components/userPreferences/ThemeSelection.js";
 import MoodBoards from "../components/userPreferences/MoodBoards.js";
 import ImageGalleryView from "../components/userPreferences/ImageGalleryView.js";
 import MoodBoardForm from "../containers/MoodBoardForm.js";
+import Moodboards from "../components/userPreferences/MoodBoards.js";
 
 const ArtworkPreferenceOptionsContainer = ({}) => {
 
@@ -105,19 +106,20 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
           name: name,
           savedArtworks: []
         };
-        setAllMoodBoards((prevMoodBoards) => [...prevMoodBoards, moodBoard]);
+        postCreateMoodBoard(moodBoard)
     };
 
 
     const postCreateMoodBoard = async (moodboard) => {
-      await fetch("http://localhost:9001/api/moodboards/" + moodboard._id, {
+      await fetch("http://localhost:9001/api/moodboards/", {
         method: 'POST',
         body: JSON.stringify(moodboard),
         headers:{
           'Content-Type': 'application/json'
         }
       })
-      .then(res => res.json());
+        .then(res => res.json())
+        .then(moodBoardWithId => setAllMoodBoards((prevMoodBoards) => [...prevMoodBoards, moodBoardWithId]))
     };
 
 
@@ -153,31 +155,83 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
     //     });
     // };
 
-    const deleteArtworkFromMoodBoard = async (artworkId, moodboardId) => {
+    const deleteArtworkFromMoodBoard = async (artworkId, moodBoard) => {
       try {
         // Create a copy of the current moodboard
-        const updatedMoodBoard = { ...newMoodBoard };
-    
+        const copyOfMoodBoard = {...moodBoard }      
+        
         // Filter out the artwork to be deleted from the savedArtworks array
-        updatedMoodBoard.savedArtworks = updatedMoodBoard.savedArtworks.filter(
+        copyOfMoodBoard.savedArtworks = copyOfMoodBoard.savedArtworks.filter(
           (artwork) => artwork.id !== artworkId
         );
-    
+
+       console.log({copyOfMoodBoard})
         // Update the moodboard in the backend
-        await updateMoodBoardFetch(updatedMoodBoard);
-    
+        await updateMoodBoardFetch(copyOfMoodBoard);
         // Update the moodboard state with the updated moodboard
-        setNewMoodBoard(updatedMoodBoard);
+       const copyOfAllMoodBoards = [... allMoodBoards]
+       const indexToReplace = copyOfAllMoodBoards.findIndex(moodboardFromArray => moodboardFromArray.id === copyOfMoodBoard.id)
+       console.log({indexToReplace})
+       copyOfAllMoodBoards[indexToReplace] = copyOfMoodBoard
+       console.log({copyOfMoodBoard})
+       console.log({copyOfAllMoodBoards})
+       setAllMoodBoards(copyOfAllMoodBoards)
       } catch (error) {
         console.log("Error deleting artwork from MoodBoard:", error);
       }
     };
 
+    const fetchDeleteArtworkFromMoodBoard = async (moodboard) => {
+      try {
+        const response = await fetch("http://localhost:9001/api/moodboards/" + moodboard.id, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(moodboard)
+        });
+        if (response.ok) {
+          // Handle successful deletion
+          console.log("Artwork deleted successfully");
+        } else {
+          // Handle error
+          console.log("Error deleting artwork:", response.statusText);
+        }
+      } catch (error) {
+        console.log("Error deleting artwork:", error);
+      }
+    };
 
-    const deleteMoodboard = (moodboardId) => {
-    setAllMoodBoards((prevMoodboards) =>
-        prevMoodboards.filter((moodboard) => moodboard._id !== moodboardId)
-    );
+
+    const deleteMoodboard = async (moodboardId) => {
+      try {
+        await fetchDeleteMoodboard(moodboardId);
+        setAllMoodBoards((prevMoodboards) =>
+          prevMoodboards.filter((moodboard) => moodboard._id !== moodboardId)
+        );
+      } catch (error) {
+        console.log("Error deleting moodboard:", error);
+      }
+    };
+
+    const fetchDeleteMoodboard = async (moodboardId) => {
+      try {
+        const response = await fetch(`http://localhost:9001/api/moodboards/${moodboardId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (response.ok) {
+          // Handle successful deletion
+          console.log("Moodboard deleted successfully");
+        } else {
+          // Handle error
+          console.log("Error deleting moodboard:", response.statusText);
+        }
+      } catch (error) {
+        console.log("Error deleting moodboard:", error);
+      }
     };
 
     const color = {
@@ -321,12 +375,12 @@ const ArtworkPreferenceOptionsContainer = ({}) => {
     return (
         <>
         <div className= "Preference-container">
+        <MoodBoardForm createMoodBoard={createMoodBoard}/>
         <ColorSelection handleColorClick = {handleColorClick}/>
         <ThemeSelection handleCultureClick = {handleCultureClick} handleReligionClick = {handleReligionClick} handleCenturyClick = {handleCenturyClick} handlePeriodClick = {handlePeriodClick} />
         </div>
         <ImageGalleryView artworkList={artworkList} colorArtworkList={colorArtworkList} addArtworkToMoodBoard={addArtworkToMoodBoard} moodboards={allMoodBoards}/>
-        <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard} />
-        <MoodBoardForm createMoodBoard={createMoodBoard}/>
+        {/* <MoodBoard newMoodBoard={newMoodBoard} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard} /> */}
         <MoodBoards moodboards={allMoodBoards} deleteArtworkFromMoodBoard={deleteArtworkFromMoodBoard} deleteMoodboard={deleteMoodboard}/>
         </>
     )

@@ -23,12 +23,6 @@ const NavBar = () => {
       <li>
         <Link to="/about">About</Link>
       </li>
-      <li>
-        <Link to="/newmoodboard">+ Moodboard</Link>
-      </li>
-      <li>
-        <Link to="/moodboards">My MoodBoards</Link>
-      </li>
     </ul>
     </>
   );

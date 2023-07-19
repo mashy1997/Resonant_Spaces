@@ -8,10 +8,7 @@ const Homepage = () => {
       <>
         <div className="Homepage-buttons">
           <Link to="/color">
-            <button>Color</button>
-          </Link>
-          <Link to="/theme">
-            <button>Theme</button>
+            <button>Inspire Me</button>
           </Link>
         </div>
       </>

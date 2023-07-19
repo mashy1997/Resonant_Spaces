@@ -6,6 +6,7 @@ import AboutSection from "./components/userPreferences/AboutSection";
 import ArtworkPreferenceOptionsContainer from "./containers/ArtworkOptionsContainer";
 import ErrorPage from "./components/userPreferences/ErrorPage";
 import MoodBoardForm from "./containers/MoodBoardForm";
+import FooterContainer from "./containers/FooterContainer";
 // import ColorSelection from "./components/userPreferences/ColorSelection";
 // import ThemeSelection from "./components/userPreferences/ThemeSelection";
 // import Moodboards from "./components/userPreferences/MoodBoards";
@@ -14,6 +15,7 @@ import MoodBoardForm from "./containers/MoodBoardForm";
 
 function App() {
   return (
+    <>
     <Router>
       <NavBar />
       <Routes>
@@ -26,8 +28,9 @@ function App() {
         {/* <Route path="/newmoodboard" element={< MoodBoardForm  />} /> */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      
     </Router>
+    <FooterContainer />
+    </>
   );
 }
 

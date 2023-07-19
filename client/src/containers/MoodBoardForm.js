@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./MoodBoardForm.css"
 
 const MoodBoardForm = ({ createMoodBoard }) => {
   const [name, setName] = useState("");
@@ -14,13 +15,14 @@ const MoodBoardForm = ({ createMoodBoard }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <form onSubmit={handleSubmit} className="MoodBoard-form">
       <label>
-        MoodBoard Name:
         <input type="text" value={name} onChange={handleNameChange} />
       </label>
       <button type="submit">Create MoodBoard</button>
     </form>
+    </>
   );
 };
 
